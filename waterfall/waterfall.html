@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Waterfall</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #ul1 {
+            width: 1080px;
+            margin: 100px auto 0;
+        }
+
+        li {
+            width: 247px;
+            list-style: none;
+            float: left;
+            margin-right: 10px;
+        }
+
+        li div {
+            border: 1px solid #000;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        li div img {
+            width: 225px;
+            display: block;
+        }
+    </style>
+    <script src="ajax.js"></script>
+    <script>
+        window.onload = function(){
+
+            ajax('get','getPics.php','cpage=1', function (data) {
+                alert(data);
+            });
+        }
+    </script>
+</head>
+<body>
+<ul id="ul1">
+    <li>
+        <div>
+            <img src="http://s22.mogucdn.com/p1/160506/8189000_ifrgkzbxgm2deojvhazdambqmeyde_640x960.png_220x330.jpg"
+                 alt="">
+            <p>韩版修身七分袖流苏T恤女的上衣拼接</p>
+        </div>
+    </li>
+    <li>
+        <div>
+            <img src="http://s16.mogucdn.com/p1/160506/63482684_ifrgemtcg5tdqojvhazdambqmeyde_640x960.jpg_220x330.webp"
+                 alt="">
+            <p>青春活力学院风T恤</p>
+        </div>
+    </li>
+    <li>
+        <div>
+            <img src="http://s22.mogucdn.com/p1/160508/103976014_ifrwiy3dmrqwcnrwhazdambqhayde_640x960.jpg_220x330.webp"
+                 alt="">
+            <p>小清新文艺碎花宽松纯棉衬衫 小清新文艺碎花宽松纯棉衬衫 小清新文艺碎花宽松纯棉衬衫</p>
+        </div>
+    </li>
+    <li>
+        <div>
+            <img src="http://s22.mogucdn.com/p1/160511/75358927_ie4wkojvha4dmnjxhazdambqgqyde_640x960.jpg_220x330.webp"
+                 alt="">
+            <p>原宿风卡通字母印花T恤</p>
+        </div>
+    </li>
+</ul>
+</body>
+</html>
