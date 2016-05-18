@@ -33,44 +33,56 @@
     </style>
     <script src="ajax.js"></script>
     <script>
-        window.onload = function(){
+        window.onload = function () {
+            var oUl = document.getElementById("ul1");
+            var aLi = oUl.getElementsByTagName("li");
+            var iLen = aLi.length;
 
-            ajax('get','getPics.php','cpage=1', function (data) {
-                alert(data);
+            //初始化数据处理
+
+            ajax('get', 'getPics.php', 'cpage=1', function (data) {
+                var data = JSON.parse(data);
+                for (var i = 0; i < data.length; i++) {
+
+                    //获取高度最短的一列li
+                    var _index = getShort();
+
+                    var oDiv = document.createElement('div');
+                    var oImg = document.createElement('img');
+                    oImg.src = data[i].preview;
+                    oDiv.appendChild(oImg);
+                    var oP = document.createElement('p');
+                    oP.innerHTML = data[i].title;
+                    oDiv.appendChild(oP);
+
+                    aLi[_index].appendChild(oDiv);
+
+
+                }
             });
+
+            //封装一个函数，找最短的一列li
+            function getShort() {
+                var index = 0;
+                var ih = aLi[index].offsetHeight;
+                for (var i = 1; i < iLen; i++) {
+                    if (aLi[i].offsetHeight < ih) {
+                        index = i;
+                        ih = aLi[i].offsetHeight;
+                    }
+
+                }
+                return index;
+            }
         }
     </script>
 </head>
 <body>
 <ul id="ul1">
-    <li>
-        <div>
-            <img src="http://s22.mogucdn.com/p1/160506/8189000_ifrgkzbxgm2deojvhazdambqmeyde_640x960.png_220x330.jpg"
-                 alt="">
-            <p>韩版修身七分袖流苏T恤女的上衣拼接</p>
-        </div>
-    </li>
-    <li>
-        <div>
-            <img src="http://s16.mogucdn.com/p1/160506/63482684_ifrgemtcg5tdqojvhazdambqmeyde_640x960.jpg_220x330.webp"
-                 alt="">
-            <p>青春活力学院风T恤</p>
-        </div>
-    </li>
-    <li>
-        <div>
-            <img src="http://s22.mogucdn.com/p1/160508/103976014_ifrwiy3dmrqwcnrwhazdambqhayde_640x960.jpg_220x330.webp"
-                 alt="">
-            <p>小清新文艺碎花宽松纯棉衬衫 小清新文艺碎花宽松纯棉衬衫 小清新文艺碎花宽松纯棉衬衫</p>
-        </div>
-    </li>
-    <li>
-        <div>
-            <img src="http://s22.mogucdn.com/p1/160511/75358927_ie4wkojvha4dmnjxhazdambqgqyde_640x960.jpg_220x330.webp"
-                 alt="">
-            <p>原宿风卡通字母印花T恤</p>
-        </div>
-    </li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
 </ul>
 </body>
 </html>
