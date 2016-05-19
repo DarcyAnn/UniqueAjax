@@ -50,6 +50,8 @@
                     var oDiv = document.createElement('div');
                     var oImg = document.createElement('img');
                     oImg.src = data[i].preview;
+                    oImg.style.width = '225px';
+                    oImg.style.height = (225/data[i].width)*data[i].height + 'px';
                     oDiv.appendChild(oImg);
                     var oP = document.createElement('p');
                     oP.innerHTML = data[i].title;
