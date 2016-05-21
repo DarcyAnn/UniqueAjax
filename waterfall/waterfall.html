@@ -43,16 +43,15 @@
             //初始化数据处理
 
             getList();
+            //封装ajax的调用，拿到返回值
             function getList() {
                 ajax('get', 'getPics.php', 'cpage=' + iPage, function (data) {
-                    if(!data.length){
+                    if (!data.length) {
                         //后续没有数据了
                         return;
                     }
                     var data = JSON.parse(data);
                     for (var i = 0; i < data.length; i++) {
-
-                        //获取高度最短的一列li
                         var _index = getShort();
 
                         var oDiv = document.createElement('div');
@@ -68,6 +67,7 @@
                         aLi[_index].appendChild(oDiv);
 
                     }
+                    //加载完数据后把门打开
                     b = true;
                 });
             }
@@ -76,39 +76,40 @@
             function getShort() {
                 var index = 0;
                 var ih = aLi[index].offsetHeight;
-                for (var i = 1; i < iLen; i++) {
+                for (var i = 0; i < iLen; i++) {
                     if (aLi[i].offsetHeight < ih) {
                         index = i;
-                        ih = aLi[i].offsetHeight;
+                        ih = aLi[index].offsetHeight;
                     }
-
                 }
                 return index;
             }
 
             function getTop(obj) {
-                var iTop = 0;
+                var oTop = 0;
                 while (obj) {
-                    iTop += obj.offsetTop;
+                    oTop = obj.offsetTop;
                     obj = obj.offsetParent;
                 }
-                return iTop;
+                return oTop;
             }
 
             window.onscroll = function () {
                 var _index = getShort();
-                var oLi = aLi[_index];
-                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                oLi = aLi[_index];
 
-                if (getTop(oLi) + oLi.offsetHeight < document.documentElement.clientHeight + scrollTop) {
+                var oLiTop = getTop(oLi);
+                var h = document.body.clientHeight || document.documentElement.clientHeight;
+                var t = document.body.scrollTop || document.documentElement.clientHeight;
+                if (oLiTop + oLi.offsetHeight < h + t) {
                     if (b) {
+                        //getList()执行时要把门关上
                         b = false;
                         iPage++;
                         getList();
                     }
                 }
             }
-
 
         }
     </script>
